@@ -2,8 +2,9 @@
 
 ***
 
-Backend  https://api.gosu.nomoredomainsmonster.ru
-Репозиторий - https://github.com/arturir/mesto-all
+Backend  https://api.arturir.nomoredomainsmonster.ru
+Репозиторий - https://github.com/arturir/movies-explorer-api
+
 
 ***
 
