@@ -43,6 +43,9 @@ module.exports.patchUserById = (req, res, next) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError("Переданы некорректные данные при обновлении профиля."));
       } else {
+        if (err.code === 11000) {
+          next(new ConflictError("Пользователь с таким Email уже существует."));
+        }
         next(err);
       }
     });
@@ -64,7 +67,7 @@ module.exports.createUser = (req, res, next) => {
             if (err.code === 11000) {
               next(new ConflictError("Такой пользователь уже существует."));
             }
-            next(("Произошла ошибка"));
+            next(err);
           }
         });
     });

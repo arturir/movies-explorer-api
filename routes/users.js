@@ -1,15 +1,6 @@
 const router = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
-
 const { getUserById, patchUserById } = require("../controllers/users");
-const regExpEmail = require("../regexp/email");
-
-const validationBodyPatchMe = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().min(3).regex(regExpEmail),
-  }),
-});
+const { validationBodyPatchMe } = require("../middlewares/validators/usersValidators");
 
 const setCurrentUser = function (req, res, next) {
   req.params._id = req.user._id;

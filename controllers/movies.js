@@ -8,7 +8,7 @@ const NotFoundError = require("../errors/NotFoundError");
 module.exports.getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
     .then((movies) => res.send({ movies }))
-    .catch(() => { next(("Произошла ошибка")); });
+    .catch((err) => { next(err); });
 };
 
 module.exports.createMovie = (req, res, next) => {
@@ -19,7 +19,7 @@ module.exports.createMovie = (req, res, next) => {
       if (err.name === "ValidationError") {
         next(new BadRequestError("Переданы некорректные данные при создании фильма."));
       } else {
-        next(("Произошла ошибка"));
+        next(err);
       }
   });
 };
